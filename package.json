@@ -4,11 +4,17 @@
   "description": "React based app with task timers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run server",
+    "server": "babel-node server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Michnet/react-timer-trackers.git"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "keywords": [
     "react",
@@ -22,14 +28,17 @@
   },
   "homepage": "https://github.com/Michnet/react-timer-trackers#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "babel-standalone": "^6.26.0",
     "fetch": "^1.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "semantic-ui-css": "^2.2.12",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "express": "^4.16.2",
     "path": "^0.12.7"
   }
