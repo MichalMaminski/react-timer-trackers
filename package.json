@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/Michnet/react-timer-trackers/issues"
   },
-  "homepage": "https://github.com/Michnet/react-timer-trackers#readme"
+  "homepage": "https://github.com/Michnet/react-timer-trackers#readme",
+  "dependencies": {
+    "babel-standalone": "^6.26.0",
+    "fetch": "^1.1.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "semantic-ui-css": "^2.2.12",
+    "uuid": "^3.1.0"
+  }
 }
