@@ -4,6 +4,8 @@ const jsonfile = require('jsonfile');
 const bodyParser = require('body-parser');
 const expressHost = express()
 
+const pathToJsonFileWithTimers = path.join(__dirname, 'timers-store.json');
+
 expressHost.set('port', process.env.PORT || 8888);
 
 expressHost.use('/', express.static(path.join(__dirname, 'src/public')));

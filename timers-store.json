@@ -1,0 +1,16 @@
+[
+    {
+        "title": "First timer",
+        "project": "Test project",
+        "id": "d27a121c-c153-43eb-b93c-15dd0dd206aa",
+        "elapsed": 482,
+        "runningSince": 1510083654905
+    },
+    {
+        "title": "Second timer",
+        "project": "Test project",
+        "id": "0734c2ed-4fbb-4896-9356-5f19c8e60bac",
+        "elapsed": 0,
+        "runningSince": 1510083657179
+    }
+]
