@@ -71,6 +71,22 @@ expressHost.post('/api/timer/stop', (req, res) => {
     });
 });
 
+expressHost.delete('/api/timer', (req, res) => {
+    jsonfile.readFile(pathToJsonFileWithTimers, (err, timers) => {
+        let timerIdToStart = req.body.id;
+        var newTimers = timers.map((timer) => {
+            if (timer.id !== timerIdToStart) {
+                return timer;
+            }
+        });
+
+        jsonfile.writeFile(pathToJsonFileWithTimers, newTimers, { spaces: 4 }, () => {
+            res.setHeader('Cache-Control', 'no-cache');
+            res.json("OK");
+        });
+    });
+});
+
 expressHost.listen(expressHost.get('port'), () => {
     console.log(`Find the server at: http://localhost:${expressHost.get('port')}/`);
 });
