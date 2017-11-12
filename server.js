@@ -28,12 +28,12 @@ expressHost.get('/api/timers', (req, res) => {
     });
 });
 
-expressHost.post('/api/timers', (req, res) => {
+expressHost.post('/api/timer', (req, res) => {
     jsonfile.readFile(pathToJsonFileWithTimers, (err, timers) => {
         timers.push(req.body);
         jsonfile.writeFile(pathToJsonFileWithTimers, timers, { spaces: 4 }, () => {
             res.setHeader('Cache-Control', 'no-cache');
-            res.json(timers);
+            res.json(req.body);
         });
     });
 });
