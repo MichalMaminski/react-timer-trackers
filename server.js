@@ -38,6 +38,39 @@ expressHost.post('/api/timer', (req, res) => {
     });
 });
 
+expressHost.post('/api/timer/start', (req, res) => {
+    jsonfile.readFile(pathToJsonFileWithTimers, (err, timers) => {
+        let timerIdToStart = req.body.id;
+        timers.forEach((timer, index) => {
+            if (timer.id === timerIdToStart) {
+                timer.runningSince = Date.now();
+            }
+        });
+
+        jsonfile.writeFile(pathToJsonFileWithTimers, timers, { spaces: 4 }, () => {
+            res.setHeader('Cache-Control', 'no-cache');
+            res.json("OK");
+        });
+    });
+});
+
+expressHost.post('/api/timer/stop', (req, res) => {
+    jsonfile.readFile(pathToJsonFileWithTimers, (err, timers) => {
+        let timerIdToStart = req.body.id;
+        timers.forEach((timer, index) => {
+            if (timer.id === timerIdToStart) {
+                timer.elapsed = timer.elapsed + (Date.now() - timer.runningSince);
+                timer.runningSince = null;
+            }
+        });
+
+        jsonfile.writeFile(pathToJsonFileWithTimers, timers, { spaces: 4 }, () => {
+            res.setHeader('Cache-Control', 'no-cache');
+            res.json("OK");
+        });
+    });
+});
+
 expressHost.listen(expressHost.get('port'), () => {
     console.log(`Find the server at: http://localhost:${expressHost.get('port')}/`);
 });
