@@ -30,7 +30,7 @@ class Timer extends React.Component {
         this.props.onStopClick(this.props.id);
     }
     render() {
-        const elapsedString = helpers.renderElapsedString(this.props.elapsed, this.props.runnningSince);
+        const elapsedString = helpers.renderElapsedString(this.props.elapsed, this.props.runningSince);
         return (
             <div className='ui centered card'>
                 <div className='content'>
@@ -49,7 +49,7 @@ class Timer extends React.Component {
                         </span>
                     </div>
                 </div>
-                <TimerActionButton timerIsRunning={!!this.props.runnningSince}
+                <TimerActionButton timerIsRunning={!!this.props.runningSince}
                     onStartClick={this.handleStartClick}
                     onStopClick={this.handleStopClick} />
             </div>
@@ -181,7 +181,7 @@ class EditableTimer extends React.Component {
                     title={this.props.title}
                     project={this.props.project}
                     elapsed={this.props.elapsed}
-                    runnningSince={this.props.runnningSince}
+                    runningSince={this.props.runningSince}
                     onEditClick={this.handleEditClick}
                     onRemoveTimer={this.handleRemoveTimer}
                     onStopClick={this.props.onStopClick}
@@ -200,7 +200,7 @@ class EditableTimerList extends React.Component {
                 title={timer.title}
                 project={timer.project}
                 elapsed={timer.elapsed}
-                runnningSince={timer.runnningSince}
+                runningSince={timer.runningSince}
                 onEditFormSubmit={this.props.onEditFormSubmit}
                 onRemoveTimer={this.props.onRemoveTimer}
                 onStartClick={this.props.onStartClick}
