@@ -232,8 +232,11 @@ class TimersDashboard extends React.Component {
     }
     onFormSubmit = (timer) => {
         let newTimer = helpers.newTimer(timer);
+
+        window.client.createTimer(newTimer, newTimer => {
         this.setState((prev, prop) => {
             return { timers: prev.timers.concat(newTimer) };
+        });
         });
     }
     handleEditFormSubmit = (timer) => {

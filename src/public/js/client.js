@@ -11,7 +11,7 @@ window.client = (function () {
       .then(success);
   }
 
-  function createTimer(data) {
+  function createTimer(data, successCallback) {
     return fetch('/api/timer', {
       method: 'post',
       body: JSON.stringify(data),
@@ -19,7 +19,9 @@ window.client = (function () {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then(checkStatus);
+    }).then(checkStatus)
+      .then(parseJSON)
+      .then(successCallback);
   }
 
   function updateTimer(data, successCallback) {
