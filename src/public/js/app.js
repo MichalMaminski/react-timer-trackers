@@ -216,22 +216,19 @@ class EditableTimerList extends React.Component {
 
 class TimersDashboard extends React.Component {
     state = {
-        timers: [
-            {
-                title: 'Pratice squat',
-                project: 'Gym Chores',
-                id: uuid.v4(),
-                elapsed: 5456099,
-                runnningSince: Date.now()
-            },
-            {
-                title: 'Bake squasht',
-                project: 'Kitechen Chores',
-                id: uuid.v4(),
-                elapsed: 1273998,
-                runnningSince: null
-            }
-        ]
+        timers: []
+    }
+
+    componentDidMount() {
+        this.loadTimersFromServer();
+        this.reloadIntervalId = setInterval(this.loadTimersFromServer, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.reloadIntervalId);
+    }
+    loadTimersFromServer = () => {
+        window.client.getTimers(serverTimers => this.setState({ timers: serverTimers }));
     }
     onFormSubmit = (timer) => {
         let newTimer = helpers.newTimer(timer);
@@ -248,19 +245,19 @@ class TimersDashboard extends React.Component {
         });
     }
     handleStartClick = (timerId) => {
-        const now = Date.now();
-        this.updateTimer({
-            id: timerId,
-            runnningSince: now
+
+        window.client.startTimer({
+            id: timerId
+        }, updatedTimer => {
+            this.updateTimer(updatedTimer)
         });
     }
     handleStopClick = (timerId) => {
-        const now = Date.now();
-        this.updateTimer({
-            id: timerId,
-        }, prevTimerState => {
-            const lastElapsed = now - prevTimerState.runnningSince;
-            return { runnningSince: null, elapsed: prevTimerState.elapsed + lastElapsed }
+
+        window.client.stopTimer({
+            id: timerId
+        }, updatedTimer => {
+            this.updateTimer(updatedTimer)
         });
     }
 
