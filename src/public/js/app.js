@@ -234,22 +234,19 @@ class TimersDashboard extends React.Component {
         let newTimer = helpers.newTimer(timer);
 
         window.client.createTimer(newTimer, newTimer => {
-        this.setState((prev, prop) => {
-            return { timers: prev.timers.concat(newTimer) };
-        });
+            this.setState((prev, prop) => {
+                return { timers: prev.timers.concat(newTimer) };
+            });
         });
     }
     handleEditFormSubmit = (timer) => {
         window.client.updateTimer(timer, updatedTimer => {
-            this.updateTimer(updatedTimer)
+            this.updateTimer(updatedTimer);
         });
     }
     handleRemoveTimer = (timerId) => {
-
-        let timers = this.state.timers
+        let timers = this.state.timers;
         window.client.deleteTimer({ id: timerId }, timerIdToRemove => {
-
-            console.log(timers.filter(t => t.id !== timerIdToRemove));
             this.setState({
                 timers: timers.filter(t => t.id !== timerIdToRemove)
             });
