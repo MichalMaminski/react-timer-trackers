@@ -242,8 +242,14 @@ class TimersDashboard extends React.Component {
         });
     }
     handleRemoveTimer = (timerId) => {
-        this.setState({
-            timers: this.state.timers.filter(t => t.id !== timerId)
+
+        let timers = this.state.timers
+        window.client.deleteTimer({ id: timerId }, timerIdToRemove => {
+
+            console.log(timers.filter(t => t.id !== timerIdToRemove));
+            this.setState({
+                timers: timers.filter(t => t.id !== timerIdToRemove)
+            });
         });
     }
     handleStartClick = (timerId) => {

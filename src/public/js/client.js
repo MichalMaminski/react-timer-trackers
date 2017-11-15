@@ -35,7 +35,7 @@ window.client = (function () {
       .then(successCallback);
   }
 
-  function deleteTimer(data) {
+  function deleteTimer(data, successCallback) {
     return fetch('/api/timer', {
       method: 'delete',
       body: JSON.stringify(data),
@@ -43,7 +43,9 @@ window.client = (function () {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then(checkStatus);
+    }).then(checkStatus)
+      .then(parseJSON)
+      .then(successCallback);
   }
 
   function startTimer(data, successCallback) {
