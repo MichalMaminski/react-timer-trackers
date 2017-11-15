@@ -237,7 +237,9 @@ class TimersDashboard extends React.Component {
         });
     }
     handleEditFormSubmit = (timer) => {
-        this.updateTimer(timer);
+        window.client.updateTimer(timer, updatedTimer => {
+            this.updateTimer(updatedTimer)
+        });
     }
     handleRemoveTimer = (timerId) => {
         this.setState({
@@ -264,12 +266,7 @@ class TimersDashboard extends React.Component {
     updateTimer = (timerNewState, setNewStateFunc) => {
         let newTimers = this.state.timers.map((t) => {
             if (t.id === timerNewState.id) {
-
-                if (setNewStateFunc) {
-                    return Object.assign({}, t, setNewStateFunc(t));
-                } else {
-                    return Object.assign({}, t, timerNewState);
-                }
+                return Object.assign({}, t, timerNewState);
             } else {
                 return t;
             }

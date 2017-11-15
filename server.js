@@ -109,7 +109,7 @@ expressHost.put('/api/timer', (req, res) => {
 
         jsonfile.writeFile(pathToJsonFileWithTimers, timers, { spaces: 4 }, (err) => {
             res.setHeader('Cache-Control', 'no-cache');
-            res.json("OK");
+            res.json(updatedTimer);
         });
     });
 });

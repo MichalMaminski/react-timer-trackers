@@ -22,7 +22,7 @@ window.client = (function () {
     }).then(checkStatus);
   }
 
-  function updateTimer(data) {
+  function updateTimer(data, successCallback) {
     return fetch('/api/timer', {
       method: 'put',
       body: JSON.stringify(data),
@@ -30,7 +30,9 @@ window.client = (function () {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then(checkStatus);
+    }).then(checkStatus)
+      .then(parseJSON)
+      .then(successCallback);
   }
 
   function deleteTimer(data) {
